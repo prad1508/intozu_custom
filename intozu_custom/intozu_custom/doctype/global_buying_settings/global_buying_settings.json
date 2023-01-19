@@ -1,0 +1,41 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-01-18 09:13:16.825821",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "update_pr_with_zero_qty"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "update_pr_with_zero_qty",
+   "fieldtype": "Check",
+   "label": "Update PR With Zero Qty"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-01-20 01:12:54.759325",
+ "modified_by": "Administrator",
+ "module": "Intozu Custom",
+ "name": "Global Buying Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

@@ -1,1 +1,7 @@
-# intozu_custom
+## Intozu Custom
+
+Intozu Custom App
+
+#### License
+
+MIT
