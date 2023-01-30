@@ -37,6 +37,7 @@ app_license = "MIT"
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 doctype_js = {
     "Purchase Receipt" : "public/js/purchase_receipt.js",
+	"Work Order" : "public/js/work_order.js",
 }
 
 # Home Pages
@@ -108,6 +109,9 @@ doctype_js = {
 doc_events = {
 	"Purchase Receipt": {
 		"before_update_after_submit": "intozu_custom.utils.purchase_receipt.qrcode_generate",
+	},
+	"Work Order":{
+		"before_update_after_submit":"intozu_custom.utils.work_order.qrcode_generate"
 	}
 	
 }
@@ -145,7 +149,8 @@ doc_events = {
 #	"frappe.desk.doctype.event.event.get_events": "intozu_custom.event.get_events"
 # }
 override_whitelisted_methods = {
-	"erpnext.buying.doctype.purchase_order.purchase_order.make_purchase_receipt": "intozu_custom.utils.purchase_receipt.make_purchase_receipt"
+	"erpnext.buying.doctype.purchase_order.purchase_order.make_purchase_receipt": "intozu_custom.utils.purchase_receipt.make_purchase_receipt",
+	"erpnext.selling.page.point_of_sale.point_of_sale.search_for_serial_or_batch_or_barcode_number": "intozu_custom.utils.purchase_receipt.search_for_serial_or_batch_or_barcode_number"
 }
 #
 # each overriding function accepts a `data` argument;
