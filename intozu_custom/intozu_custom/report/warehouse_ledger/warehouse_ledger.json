@@ -1,0 +1,30 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2023-03-24 00:12:02.292841",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Intozi Letterhead",
+ "modified": "2023-03-24 00:12:02.292841",
+ "modified_by": "Administrator",
+ "module": "Intozu Custom",
+ "name": "Warehouse Ledger",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Warehouse Ledger Entry",
+ "report_name": "Warehouse Ledger",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Accounts Manager"
+  }
+ ]
+}

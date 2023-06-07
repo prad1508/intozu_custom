@@ -38,8 +38,12 @@ app_license = "MIT"
 doctype_js = {
     "Purchase Receipt" : "public/js/purchase_receipt.js",
 	"Work Order" : "public/js/work_order.js",
+	# "Stock Entry" : "public/js/stock_entry.js",
 }
-
+doctype_list_js = {
+	"Purchase Receipt" : "public/js/purchase_receipt_list.js",
+	"Purchase Order" : "public/js/purchase_order_list.js",
+}
 # Home Pages
 # ----------
 
@@ -92,7 +96,7 @@ doctype_js = {
 # Override standard doctype classes
 
 # override_doctype_class = {
-#	"ToDo": "custom_app.overrides.CustomToDo"
+# 	"Event": "intozu_custom.utils.stock_ledger_entry.Event"
 # }
 
 # Document Events
@@ -109,13 +113,33 @@ doctype_js = {
 doc_events = {
 	"Purchase Receipt": {
 		"before_update_after_submit": "intozu_custom.utils.purchase_receipt.qrcode_generate",
+		"on_update" :"intozu_custom.utils.purchase_receipt.update_pendding_qty_on_po",
+		"on_submit" : "intozu_custom.utils.purchase_order.on_update_pr_change_status",
+		# "on_cancel" : "intozu_custom.utils.purchase_order.on_cancel_pr_change_status"
 	},
 	"Work Order":{
-		"before_update_after_submit":"intozu_custom.utils.work_order.qrcode_generate"
-	}
-	
+		"before_update_after_submit":"intozu_custom.utils.work_order.qrcode_generate",
+	},
+	"Stock Entry": {
+		"on_update" : "intozu_custom.utils.stock_entry.update_pendding_qty",
+		"on_submit" : "intozu_custom.utils.stock_entry.on_update_se_change_status",
+	},
+	"Purchase Order":{
+		"on_update_after_submit" : "intozu_custom.utils.purchase_order.on_update_po_change_status",
+		"on_cancel":"intozu_custom.utils.purchase_order.on_cancel_po_change_status",
+	},
+	"Pick List":{
+		"before_submit" : "intozu_custom.utils.pick_list.create_stock_entry_onsubmit",
+		"on_submit" : "intozu_custom.utils.pick_list.on_submit_so_change_status",
+		"on_update":"intozu_custom.utils.pick_list.update_pennding_picked_qty_so",
+		"on_cancel" : "intozu_custom.utils.pick_list.on_cancel_so_confirm_status",
+		"on_trash" : "intozu_custom.utils.pick_list.on_cancel_so_confirm_status",
+	},
+	"Stock Ledger Entry":{
+		"before_insert":"intozu_custom.utils.stock_ledger_entry.get_data_in_wle",
+	},
 }
-
+# before_update_after_submit
 # Scheduled Tasks
 # ---------------
 
@@ -150,7 +174,8 @@ doc_events = {
 # }
 override_whitelisted_methods = {
 	"erpnext.buying.doctype.purchase_order.purchase_order.make_purchase_receipt": "intozu_custom.utils.purchase_receipt.make_purchase_receipt",
-	"erpnext.selling.page.point_of_sale.point_of_sale.search_for_serial_or_batch_or_barcode_number": "intozu_custom.utils.purchase_receipt.search_for_serial_or_batch_or_barcode_number"
+	"erpnext.selling.page.point_of_sale.point_of_sale.search_for_serial_or_batch_or_barcode_number": "intozu_custom.utils.purchase_receipt.search_for_serial_or_batch_or_barcode_number",
+	"erpnext.stock.doctype.purchase_receipt.purchase_receipt.make_stock_entry" : "intozu_custom.utils.purchase_receipt.make_stock_entry",
 }
 #
 # each overriding function accepts a `data` argument;

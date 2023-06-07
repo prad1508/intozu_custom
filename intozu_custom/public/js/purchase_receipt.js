@@ -7,7 +7,23 @@ frappe.ui.form.on('Purchase Receipt', {
         if (cur_frm.doc.docstatus === 1) {
             cur_frm.set_df_property('use_qr_in_print', 'hidden', 0);
         }
-    }
+    },
+    // on_submit: function (frm) {
+    //     console.log("TEST>>>>>>>>>>>>>>>>>>>.")
+    //     frappe.call({
+    //         method: "intozu_custom.utils.purchase_receipt.qrcode_generate",
+    //         args: {
+    //             "name": frm.doc.name
+    //         },
+    //         callback: function (r) {
+    //             if (r.message) {
+    //                 frm.set_value("qr_items", r.message)
+    //                 frm.refresh_fields("qr_items")
+    //                 frm.save("Update")
+    //             }
+    //         }
+    //     })
+    // }
 
 });
 
@@ -43,3 +59,33 @@ frappe.ui.form.on('Purchase Receipt Item', {
         });
     }
 });
+
+frappe.ui.form.on("Purchase Receipt Item", {
+    item_code: function (frm, cdt, cdn) {
+        var row = locals[cdt][cdn]
+        frappe.call({
+            method: 'barcode.custom_purchase_receipt.barcode',
+            args: {
+                item_code: row.item_code,
+            },
+            callback: (r) => {
+                row.item_barcode = r.message
+                frm.refresh_fields("items")
+            }
+        });
+    },
+    uom: function (frm, cdt, cdn) {
+        var row = locals[cdt][cdn]
+        frappe.call({
+            method: 'barcode.custom_purchase_receipt.barcode_uom',
+            args: {
+                item_code: row.item_code,
+                uom: row.uom
+            },
+            callback: (r) => {
+                row.item_barcode = r.message
+                frm.refresh_fields("items")
+            }
+        });
+    }
+})
